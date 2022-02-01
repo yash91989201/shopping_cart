@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react";
+import {useQuery} from "react-query";
+// Importing types
+import { CartItemType } from "./types";
+// Importing styled components
+import { LoadingComponent } from "./App.styles";
+// Importing material ui components
+import { LinearProgress } from "@material-ui/core";
+
+// Fetch product data from API endpoint
+const fetchProductData=async ():Promise<CartItemType[]> =>{
+  const res=await fetch("https://fakestoreapi.com/products");
+  return await res.json();
+}
+
 
 function App() {
+  const {data,isLoading,error}=useQuery<CartItemType[]>("products",fetchProductData);
+  if(isLoading) 
+  return <LoadingComponent>
+    <h3>Hang On ! Getting Products</h3>
+    <LinearProgress/>
+  </LoadingComponent>
+  if(error) return <div>Error in fetching data ...</div>;
+  console.log(data);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
