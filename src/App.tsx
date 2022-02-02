@@ -35,7 +35,19 @@ function App() {
         });
   }; 
 
-  const handleRemoveFromCart=()=>{};
+  const handleRemoveFromCart = (id: number) => {
+    setCartItem(prev =>
+      prev.reduce((accumulator, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) 
+             return accumulator;
+          return [...accumulator, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...accumulator, item];
+        }
+      }, [] as CartItemType[])
+    );
+  };
 
   if (isLoading)
     return <div className="w-1/2 h-screen m-auto py-80 text-center">  

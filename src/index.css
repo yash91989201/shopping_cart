@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
+
+.border {
+  @apply border-blue-700 border-b-2;
+}
+
+.cartButton {
+  @apply w-16 px-4 py-1.5 bg-slate-200 font-bold rounded-md;
+}
+
 @tailwind utilities;

@@ -21,3 +21,9 @@ export type CartProps = {
   addToCart: (clickedItem: CartItemType) => void;
   removeFromCart: (id: number) => void;
 };
+
+export type CartItemProps = {
+  item: CartItemType;
+  addToCart: (clickedItem: CartItemType) => void;
+  removeFromCart: (id: number) => void;
+};

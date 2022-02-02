@@ -4,7 +4,7 @@ import { ItemProps } from "../types";
 
 const Items: React.FC<ItemProps> = ({ item, handleAddToCart }) => {
   return <div className="w-[400px] px-4 py-2 flex flex-col  border-blue-500 border rounded-xl">
-    <img className="h-60 m-auto my-4 object-contain" src={item.image} alt={item.description} />
+    <img className="h-60 w-9/12 m-auto my-6 object-contain" src={item.image} alt={item.description} />
     <div className="m-auto">
       <h3 className="text-xl font-medium">{item.title}</h3>
       <p className="py-2">{item.description.slice(0, 150)}</p>
