@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 // Importing types
 import { CartItemType } from "./types";
 // Importing material ui components
-import {LinearProgress,Drawer} from "@material-ui/core";
+import {LinearProgress,Drawer,Badge} from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 // Importing components
 import Items from "./components/Items";
@@ -18,7 +18,12 @@ const fetchProductData = async (): Promise<CartItemType[]> => {
 function App() {
   const { data, isLoading, error } = useQuery<CartItemType[]>("products", fetchProductData);
   const [cartItems,setCartItem] =useState([] as CartItemType[]);
-  const [cartOpen ,setCartOpen] =useState(true);
+  const [cartOpen ,setCartOpen] =useState(false);
+
+  const getTotalItems=(items:CartItemType[])=>{
+    return items.reduce((ack:number,item)=>ack+item.amount,0)
+  };
+
   const handleAddToCart=(clickedItem:CartItemType)=>{
     setCartItem(previous=>{
       // 1. For items already in cart
@@ -67,7 +72,9 @@ function App() {
         bg-stone-100/80"
       >
         <h1 className="text-3xl font-semibold">Clothes Mart</h1>
-        <AddShoppingCartIcon style={{fontSize:"2rem",cursor:"pointer",}} onClick={()=>setCartOpen(true)} />
+        <Badge badgeContent={getTotalItems(cartItems)} color="primary"  showZero max={9}>
+          <AddShoppingCartIcon color="action" style={{cursor:"pointer"}}  onClick={()=>setCartOpen(true)} />
+        </Badge>
       </div>
       {/* Header End */}
       {/* Cart Sidebar Start */}

@@ -8,7 +8,7 @@ const Items: React.FC<ItemProps> = ({ item, handleAddToCart }) => {
     <div className="m-auto">
       <h3 className="text-xl font-medium">{item.title}</h3>
       <p className="py-2">{item.description.slice(0, 150)}</p>
-      <h2 className="pl-2 my-2 text-2xl">${item.price}</h2>
+      <h2 className="my-2 text-2xl">${item.price}</h2>
     </div>
     <button
       className=" 
